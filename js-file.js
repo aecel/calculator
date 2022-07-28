@@ -14,6 +14,10 @@ const operate = (operation, num1, num2) => {
     }
 }
 
+const getNumLength = (number) => {
+    const length = (number + '').replace('.', '').length;
+    return length;
+}
 
 const isClicked = (e) => {
 
@@ -85,6 +89,17 @@ const isClicked = (e) => {
             prevButton = "equals";
         }
 
+    }
+
+    // If Numbers are too long, make font size smaller
+    if(getNumLength(presentDisplay.textContent)>23) {
+        presentDisplay.style.fontSize = '10px';
+    } else if(getNumLength(presentDisplay.textContent)>15) {
+        presentDisplay.style.fontSize = '20px';
+    } else if(getNumLength(presentDisplay.textContent)>7) {
+        presentDisplay.style.fontSize = '30px';
+    } else {
+        presentDisplay.style.fontSize = '60px';
     }
     
 }
