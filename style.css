@@ -1,0 +1,87 @@
+* {
+    font-family: Helvetica, sans-serif;
+    font-weight: 500;
+    color: white;
+}
+body {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+    background-color: #e2e2e2;
+}
+
+.main-body {
+    margin-top: 50px;
+    height: 500px;
+    width: 300px;
+    background-color: black;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+    box-shadow: 10px 10px #aaaaaa;
+}
+
+.display {
+    text-align: right;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.present-display {
+    margin-top: 10px;
+    font-size: 60px;
+}
+
+.main-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 15px;
+    font-size: 20px;
+}
+
+.button {
+    height: 50px;
+    width: 50px;
+    background-color: #313131;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.operation {
+    font-size: 28px;
+
+    background-color: #f69906;
+}
+
+.other {
+    font-size: 16px;
+    background-color: #A0A0A0;
+    color: black;
+}
+
+#zero {
+    width: 115px;
+    border-radius: 50px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.pressedButton {
+    background-color: white;
+    color: black;
+}
