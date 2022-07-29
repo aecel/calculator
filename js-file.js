@@ -9,11 +9,12 @@ const operate = (operation, num1, num2) => {
         if (num2 == 0) {
             return "Nah man";
         } else {
-            return Math.round((num1 / num2)*100)/100;
+            return Math.round((num1 / num2) * 100) / 100;
         }
     }
 }
 
+// Returns how long the number is
 const getNumLength = (number) => {
     const length = (number + '').replace('.', '').length;
     return length;
@@ -40,16 +41,25 @@ const isClicked = (e) => {
         console.log("DELETE")
         prevButton = "delete";
     } else if (e.target.classList.contains("num")) {        // If a number is pressed
-        if (presentDisplay.textContent == 0 || prevButton == "operation") {
+        if (presentDisplay.textContent == 0 || prevButton == "operation" || presentDisplay.textContent == "Nah man") {
             presentDisplay.textContent = e.target.textContent;
+            prevButton = "num";
+        } else if (prevButton == "equals") {
+            // Do nothing
         } else {
             presentDisplay.textContent += e.target.textContent;
+            prevButton = "num";
         }
-        prevButton = "num";
+
     } else if (e.target.classList.contains("operation")) {      // If an operation is pressed
 
         if (prevButton == "operation") {
             // Do nothing
+        } else if (presentDisplay.textContent == "Nah man") {
+            num1 = 0;
+            pastDisplay.textContent = "0" + " " + e.target.textContent;
+            presentDisplay.textContent = "";
+            operation = e.target.id;
         } else if (prevButton == "equals") {
             pastDisplay.textContent = num1 + " " + e.target.textContent;
             presentDisplay.textContent = "";
@@ -91,17 +101,21 @@ const isClicked = (e) => {
 
     }
 
-    // If Numbers are too long, make font size smaller
-    if(getNumLength(presentDisplay.textContent)>23) {
+    // If numbers are too long, make font size smaller
+    if (getNumLength(presentDisplay.textContent) > 23) {
         presentDisplay.style.fontSize = '10px';
-    } else if(getNumLength(presentDisplay.textContent)>15) {
+        pastDisplay.style.fontSize = '8px';
+    } else if (getNumLength(presentDisplay.textContent) > 15) {
         presentDisplay.style.fontSize = '20px';
-    } else if(getNumLength(presentDisplay.textContent)>7) {
+        pastDisplay.style.fontSize = '14px';
+    } else if (getNumLength(presentDisplay.textContent) > 7) {
         presentDisplay.style.fontSize = '30px';
+        pastDisplay.style.fontSize = '18px';
     } else {
         presentDisplay.style.fontSize = '60px';
+        pastDisplay.style.fontSize = '24px';
     }
-    
+
 }
 
 const buttons = document.querySelectorAll(".button");
