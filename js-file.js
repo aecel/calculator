@@ -32,48 +32,56 @@ const isClicked = (e) => {
         num1 = undefined;
         num2 = undefined;
         operation = undefined;
-        prevButton = undefined;
+        historyStack.clear();
     } else if (e.target.textContent == "+/-") {     // If +/- is pressed
-        console.log(isNaN(presentDisplay.textContent));
-        if (isNaN(presentDisplay.textContent) || prevButton == "equals") {
+        if (isNaN(presentDisplay.textContent) || historyStack.getPrevButton() == "equals") {
             // Do nothing
         } else {
             presentDisplay.textContent *= -1;
         }
     } else if (e.target.textContent == "DEL") {     // If DEL is pressed
-        console.log("DELETE")
-        prevButton = "delete";
+        const prevButton = historyStack.getPrevButton()
+
+        if (prevButton == "num" || prevButton == "dot") {
+            historyStack.delete()
+            presentDisplay.textContent = presentDisplay.textContent.slice(0, -1);
+            if (presentDisplay.textContent == "") {
+                presentDisplay.textContent = 0;
+                historyStack.pushHistory("num")
+            }
+        }
+
     } else if (e.target.textContent == ".") {       // If "." is pressed
-        if (presentDisplay.textContent.includes(".") || prevButton == "equals") {
+        if (presentDisplay.textContent.includes(".") || historyStack.getPrevButton() == "equals") {
             // Do nothing
-        } else if (prevButton == "operation" || presentDisplay.textContent == "Nah man") {
+        } else if (historyStack.getPrevButton() == "operation" || presentDisplay.textContent == "Nah man") {
             presentDisplay.textContent = e.target.textContent;
-            prevButton = "dot";
+            historyStack.pushHistory("dot");
         } else {
             presentDisplay.textContent += e.target.textContent;
-            prevButton = "dot";
+            historyStack.pushHistory("dot");
         }
     } else if (e.target.classList.contains("num")) {        // If a number is pressed
-        if (presentDisplay.textContent == 0 || prevButton == "operation" || presentDisplay.textContent == "Nah man") {
+        if (historyStack.getPrevButton() != "dot" && (presentDisplay.textContent == 0 || historyStack.getPrevButton() == "operation" || presentDisplay.textContent == "Nah man")) {
             presentDisplay.textContent = e.target.textContent;
-            prevButton = "num";
-        } else if (prevButton == "equals") {
+            historyStack.pushHistory("num");
+        } else if (historyStack.getPrevButton() == "equals") {
             // Do nothing
         } else {
             presentDisplay.textContent += e.target.textContent;
-            prevButton = "num";
+            historyStack.pushHistory("num");
         }
 
     } else if (e.target.classList.contains("operation")) {      // If an operation is pressed
 
-        if (prevButton == "operation") {
+        if (historyStack.getPrevButton() == "operation") {
             // Do nothing
         } else if (presentDisplay.textContent == "Nah man") {
             num1 = 0;
             pastDisplay.textContent = "0" + " " + e.target.textContent;
             presentDisplay.textContent = "";
             operation = e.target.id;
-        } else if (prevButton == "equals") {
+        } else if (historyStack.getPrevButton() == "equals") {
             pastDisplay.textContent = num1 + " " + e.target.textContent;
             presentDisplay.textContent = "";
             operation = e.target.id;
@@ -82,7 +90,7 @@ const isClicked = (e) => {
             pastDisplay.textContent = num1 + " " + e.target.textContent;
             presentDisplay.textContent = "";
             operation = e.target.id;
-        } else if (prevButton == "num") {
+        } else if (historyStack.getPrevButton() == "num") {
             num2 = presentDisplay.textContent;
             const answer = operate(operation, num1, num2);
             pastDisplay.textContent = answer + " " + e.target.textContent;
@@ -92,11 +100,11 @@ const isClicked = (e) => {
             operation = e.target.id;
         }
 
-        prevButton = "operation";
+        historyStack.pushHistory("operation");
     } else if (e.target.textContent == "=") {       // If = is pressed
-        if (prevButton == "equals") {
+        if (historyStack.getPrevButton() == "equals") {
             // Do nothing
-        } else if ((prevButton == "num" || prevButton == "dot") && (operation)) {
+        } else if ((historyStack.getPrevButton() == "num" || historyStack.getPrevButton() == "dot") && (operation)) {
             num2 = presentDisplay.textContent;
             pastDisplay.textContent += " " + num2 + " " + e.target.textContent;
             const answer = operate(operation, num1, num2);
@@ -109,7 +117,7 @@ const isClicked = (e) => {
             }
             num2 = undefined;
             operation = undefined;
-            prevButton = "equals";
+            historyStack.pushHistory("equals");
         }
 
     }
@@ -131,6 +139,19 @@ const isClicked = (e) => {
 
 }
 
+const newHistoryStack = () => {
+    const stack = []
+
+    return {
+        getPrevButton: () => stack[stack.length - 1],
+        pushHistory: (prev) => stack.push(prev),
+        delete: () => stack.pop(),
+        clear: () => {
+            stack.length = 0
+        }
+    }
+}
+
 const buttons = document.querySelectorAll(".button");
 const presentDisplay = document.getElementById("present-display");
 const pastDisplay = document.getElementById("past-display");
@@ -139,7 +160,7 @@ let num1 = undefined;
 let num2 = undefined;
 let op = false;
 let operation = undefined;
-let prevButton = undefined;
+let historyStack = newHistoryStack();
 let prevOperation = undefined;
 presentDisplay.textContent = 0;
 buttons.forEach((button) => {
