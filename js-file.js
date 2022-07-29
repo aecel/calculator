@@ -4,7 +4,7 @@ const operate = (operation, num1, num2) => {
     } else if (operation == "subtract") {
         return num1 - num2;
     } else if (operation == "multiply") {
-        return num1 * num2;
+        return Math.round((num1 * num2) * 100) / 100;
     } else if (operation == "divide") {
         if (num2 == 0) {
             return "Nah man";
@@ -40,6 +40,16 @@ const isClicked = (e) => {
     } else if (e.target.textContent == "DEL") {     // If DEL is pressed
         console.log("DELETE")
         prevButton = "delete";
+    } else if (e.target.textContent == ".") {       // If "." is pressed
+        if (presentDisplay.textContent.includes(".") || prevButton == "equals") {
+            // Do nothing
+        } else if (prevButton == "operation" || presentDisplay.textContent == "Nah man") {
+            presentDisplay.textContent = e.target.textContent;
+            prevButton = "dot";
+        } else {
+            presentDisplay.textContent += e.target.textContent;
+            prevButton = "dot";
+        }
     } else if (e.target.classList.contains("num")) {        // If a number is pressed
         if (presentDisplay.textContent == 0 || prevButton == "operation" || presentDisplay.textContent == "Nah man") {
             presentDisplay.textContent = e.target.textContent;
