@@ -33,10 +33,13 @@ const isClicked = (e) => {
         num2 = undefined;
         operation = undefined;
         prevButton = undefined;
-        console.log("CLEAR ALL")
     } else if (e.target.textContent == "+/-") {     // If +/- is pressed
-        console.log("NEG")
-        prevButton = "neg";
+        console.log(isNaN(presentDisplay.textContent));
+        if (isNaN(presentDisplay.textContent) || prevButton == "equals") {
+            // Do nothing
+        } else {
+            presentDisplay.textContent *= -1;
+        }
     } else if (e.target.textContent == "DEL") {     // If DEL is pressed
         console.log("DELETE")
         prevButton = "delete";
@@ -93,7 +96,7 @@ const isClicked = (e) => {
     } else if (e.target.textContent == "=") {       // If = is pressed
         if (prevButton == "equals") {
             // Do nothing
-        } else if ((prevButton == "num") && (operation)) {
+        } else if ((prevButton == "num" || prevButton == "dot") && (operation)) {
             num2 = presentDisplay.textContent;
             pastDisplay.textContent += " " + num2 + " " + e.target.textContent;
             const answer = operate(operation, num1, num2);
