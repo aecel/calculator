@@ -1,88 +1,97 @@
 * {
-    font-family: Helvetica, sans-serif;
-    font-weight: 500;
-    color: white;
+  font-family: Helvetica, sans-serif;
+  font-weight: 500;
+  color: white;
 }
+
+html {
+  background: url(./images/bg.svg) no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e2e2e2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #e2e2e2; */
 }
 
 .main-body {
-    margin-top: 50px;
-    height: 500px;
-    width: 300px;
-    background-color: black;
-    border-radius: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 40px;
-    box-shadow: 10px 10px #aaaaaa;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  height: 500px;
+  width: 300px;
+  background-color: black;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 40px;
+  box-shadow: 10px 10px #C2BBAB;
 }
 
 .display {
-    text-align: right;
-    margin-right: 30px;
-    margin-bottom: 30px;
-    font-size: 24px;
+  text-align: right;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  font-size: 24px;
 }
 
 #present-display {
-    height: 60px;
-    margin-top: 10px;
-    font-size: 60px;
+  height: 60px;
+  margin-top: 10px;
+  font-size: 60px;
 }
 
 .main-buttons {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 15px;
-    font-size: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 15px;
+  font-size: 20px;
 }
 
 .button {
-    height: 50px;
-    width: 50px;
-    background-color: #313131;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  height: 50px;
+  width: 50px;
+  background-color: #313131;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .operation {
-    font-size: 28px;
+  font-size: 28px;
 
-    background-color: #f69906;
+  background-color: #f69906;
 }
 
 .other {
-    font-size: 16px;
-    background-color: #A0A0A0;
-    color: black;
+  font-size: 16px;
+  background-color: #a0a0a0;
+  color: black;
 }
 
 #zero {
-    width: 115px;
-    border-radius: 50px;
-    grid-column-start: 1;
-    grid-column-end: 3;
+  width: 115px;
+  border-radius: 50px;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .pressedButton {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }
