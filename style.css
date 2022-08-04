@@ -14,8 +14,10 @@ html {
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+
   /* background-color: #e2e2e2; */
 }
 
@@ -30,7 +32,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 40px;
-  box-shadow: 10px 10px #C2BBAB;
+  box-shadow: 10px 10px #c2bbab;
 }
 
 .display {
@@ -94,4 +96,14 @@ body {
 .pressedButton {
   background-color: white;
   color: black;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  font-size: 12px;
+  /* background-color: rgb(226, 226, 226); */
+  color: rgb(53, 53, 53);
 }
