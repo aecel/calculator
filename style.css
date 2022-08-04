@@ -93,10 +93,10 @@ body {
   grid-column-end: 3;
 }
 
-.pressedButton {
+/* .pressedButton {
   background-color: white;
   color: black;
-}
+} */
 
 footer {
   display: flex;
@@ -106,4 +106,23 @@ footer {
   font-size: 12px;
   /* background-color: rgb(226, 226, 226); */
   color: rgb(53, 53, 53);
+}
+
+/* Hover animations */
+
+.button:hover {
+  background-color: rgb(101, 101, 101);
+}
+
+.operation:hover {
+  background-color: #f5bc60;
+}
+
+.other:hover {
+  background-color: #c3c3c3;
+}
+
+.button:active {
+  background-color: white;
+  color: black;
 }

@@ -23,8 +23,8 @@ const getNumLength = (number) => {
 const isClicked = (e) => {
 
     // Lights up a button when it is pressed
-    e.target.classList.toggle("pressedButton");
-    setTimeout(() => { e.target.classList.toggle("pressedButton"); }, 150);
+    // e.target.classList.toggle("pressedButton");
+    // setTimeout(() => { e.target.classList.toggle("pressedButton"); }, 150);
 
     if (e.target.textContent == "AC") {     // If AC is pressed
         presentDisplay.textContent = 0;
